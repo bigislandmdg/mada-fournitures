@@ -11,9 +11,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Conserver l'alias du middleware administrateur
         $middleware->alias([
             'admin' => \App\Http\Middleware\IsAdmin::class,
         ]);
+
+        // Ajouter le middleware de gestion des langues
+        $middleware->web(
+            append: [
+                \App\Http\Middleware\SetLocale::class,
+            ]
+        );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

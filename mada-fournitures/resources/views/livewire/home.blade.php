@@ -21,38 +21,37 @@
             {{-- Badge --}}
             <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8 animate-fade-in-down">
                 <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                <span class="text-sm font-medium">Fournisseur agréé — Marchés publics & entreprises</span>
+                <span class="text-sm font-medium">{{ __('ui.hero_badge') }}</span>
             </div>
 
             {{-- Titre --}}
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight tracking-tight animate-fade-in-up">
-                Tout ce qu'il vous faut,
+                {{ __('ui.hero_title_first') }}
                 <br class="hidden md:block">
                 <span class="bg-gradient-to-r from-yellow-300 via-white to-yellow-300 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                    au même endroit
+                    {{ __('ui.hero_title_second') }}
                 </span>
             </h1>
 
             {{-- Sous-titre --}}
             <p class="text-lg md:text-xl mb-10 text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
-                Équipements, matériaux et fournitures pour les entreprises,
-                les collectivités et les projets publics à Madagascar.
+                {{ __('ui.hero_description') }}
             </p>
 
             {{-- Boutons --}}
             <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up" style="animation-delay: 0.4s;">
                 <a href="{{ route('fournitures.index') }}"
                    class="group bg-white text-brand-700 px-8 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                    Découvrir nos produits
+                    {{ __('ui.discover_products') }}
                     <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                     </svg>
                 </a>
                 <a href="{{ route('devis') }}"
                    class="group bg-brand-900/50 backdrop-blur-sm border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-900 hover:border-white transition-all duration-300 flex items-center justify-center gap-2">
-                    Demander un devis
+                    {{ __('ui.request_quote') }}
                     <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-.293.707l-5.414 5.414A1 1 0 0112.586 21H7a2 2 0 01-2-2z"/>
                     </svg>
                 </a>
             </div>
@@ -61,15 +60,15 @@
             <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto mt-16 animate-fade-in-up" style="animation-delay: 0.6s;">
                 <div class="text-center">
                     <div class="text-3xl md:text-4xl font-extrabold text-white">+500</div>
-                    <div class="text-blue-200 text-sm mt-1">Produits référencés</div>
+                    <div class="text-blue-200 text-sm mt-1">{{ __('ui.stat_products') }}</div>
                 </div>
                 <div class="text-center border-x border-white/20">
                     <div class="text-3xl md:text-4xl font-extrabold text-white">+200</div>
-                    <div class="text-blue-200 text-sm mt-1">Clients satisfaits</div>
+                    <div class="text-blue-200 text-sm mt-1">{{ __('ui.stat_clients') }}</div>
                 </div>
                 <div class="text-center">
                     <div class="text-3xl md:text-4xl font-extrabold text-white">24h</div>
-                    <div class="text-blue-200 text-sm mt-1">Réponse devis</div>
+                    <div class="text-blue-200 text-sm mt-1">{{ __('ui.stat_quote_response') }}</div>
                 </div>
             </div>
         </div>
@@ -86,9 +85,9 @@
              x-intersect.once="shown = true">
         <div class="text-center mb-14"
              :class="shown ? 'animate-fade-in-down' : 'opacity-0'">
-            <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Nos produits</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-3">Nos principales catégories</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Découvrez notre gamme de produits adaptés à vos besoins professionnels</p>
+            <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider">{{ __('ui.categories_eyebrow') }}</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-3">{{ __('ui.categories_title') }}</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">{{ __('ui.categories_description') }}</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -116,7 +115,7 @@
                         </p>
 
                         <div class="mt-4 flex items-center text-brand-600 group-hover:text-white font-semibold text-sm transition-colors">
-                            <span>Voir les produits</span>
+                            <span>{{ __('ui.view_products') }}</span>
                             <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
@@ -134,17 +133,29 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14"
                  :class="shown ? 'animate-fade-in-down' : 'opacity-0'">
-                <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Nos atouts</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-3">Pourquoi nous choisir ?</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Un partenaire fiable pour tous vos projets d'approvisionnement</p>
+                <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider">{{ __('ui.advantages_eyebrow') }}</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-3">{{ __('ui.why_choose_us') }}</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">{{ __('ui.advantages_description') }}</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @php
                     $avantages = [
-                        ['icon' => 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', 'titre' => 'Fiabilité', 'texte' => 'Produits conformes et livraison dans les délais annoncés, à chaque commande.'],
-                        ['icon' => 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1', 'titre' => 'Prix compétitifs', 'texte' => 'Des tarifs adaptés aux réalités du marché malgache, sans compromis sur la qualité.'],
-                        ['icon' => 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z', 'titre' => 'Marchés publics', 'texte' => "Maîtrise complète des procédures d'appels d'offres et de facturation publique."],
+                        [
+                            'icon' => 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+                            'titre' => __('ui.reliability'),
+                            'texte' => __('ui.reliability_description'),
+                        ],
+                        [
+                            'icon' => 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1',
+                            'titre' => __('ui.competitive_prices'),
+                            'texte' => __('ui.competitive_prices_description'),
+                        ],
+                        [
+                            'icon' => 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+                            'titre' => __('ui.public_markets'),
+                            'texte' => __('ui.public_markets_description'),
+                        ],
                     ];
                 @endphp
 
@@ -183,27 +194,27 @@
 
             <div class="relative">
                 <span class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-                    Devis gratuit sous 24h
+                    {{ __('ui.free_quote_badge') }}
                 </span>
 
                 <h2 class="text-3xl md:text-5xl font-extrabold mb-5 leading-tight">
-                    Besoin d'un devis pour votre projet ?
+                    {{ __('ui.final_cta_title') }}
                 </h2>
                 <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
-                    Décrivez-nous votre besoin, nous vous répondons rapidement avec une offre personnalisée.
+                    {{ __('ui.final_cta_description') }}
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('devis') }}"
                        class="group bg-white text-brand-700 px-8 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                        Demander un devis
+                        {{ __('ui.request_quote') }}
                         <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
                     <a href="{{ route('contact') }}"
                        class="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all duration-300">
-                        Nous contacter
+                        {{ __('ui.contact_us') }}
                     </a>
                 </div>
             </div>

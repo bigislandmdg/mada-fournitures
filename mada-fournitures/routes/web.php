@@ -1,5 +1,7 @@
+
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,15 +32,33 @@ Route::livewire('/devis', 'panier-devis')->name('devis');
 
 /*
 |--------------------------------------------------------------------------
+| Changement de langue - Français / Malagasy
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/langue', function (Request $request) {
+    $validated = $request->validate([
+        'locale' => ['required', 'in:fr,mg'],
+    ]);
+
+    $request->session()->put('locale', $validated['locale']);
+
+    return redirect()->back();
+})->name('lang.switch');
+
+/*
+|--------------------------------------------------------------------------
 | Route dashboard (redirection selon le rôle)
 |--------------------------------------------------------------------------
 | Breeze redirige l'utilisateur vers route('dashboard') après connexion.
 | Cette route redirige l'admin vers /admin/dashboard et les autres vers /.
 */
+
 Route::middleware('auth')->get('/dashboard', function () {
     if (auth()->user()->is_admin) {
         return redirect()->route('admin.dashboard');
     }
+
     return redirect()->route('home');
 })->name('dashboard');
 
@@ -47,6 +67,7 @@ Route::middleware('auth')->get('/dashboard', function () {
 | Routes d'authentification (fournies par Breeze)
 |--------------------------------------------------------------------------
 */
+
 require __DIR__.'/auth.php';
 
 /*
@@ -54,4 +75,5 @@ require __DIR__.'/auth.php';
 | Routes admin
 |--------------------------------------------------------------------------
 */
+
 require __DIR__.'/admin.php';

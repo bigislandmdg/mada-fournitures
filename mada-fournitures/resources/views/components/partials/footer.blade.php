@@ -165,11 +165,9 @@
 
             {{-- Liens légaux --}}
             <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-500">
-                <a href="#" class="hover:text-white transition-colors">Mentions légales</a>
-                <span class="text-gray-700 hidden sm:inline">·</span>
-                <a href="#" class="hover:text-white transition-colors">Confidentialité</a>
-                <span class="text-gray-700 hidden sm:inline">·</span>
-                <a href="#" class="hover:text-white transition-colors">CGV</a>
+              <a href="{{ route('mentions-legales') }}" class="hover:text-white transition-colors">Mentions légales</a>
+              <span class="text-gray-700 hidden sm:inline">·</span>
+              <a href="{{ route('confidentialite') }}" class="hover:text-white transition-colors">Confidentialité</a>
             </div>
         </div>
     </div>

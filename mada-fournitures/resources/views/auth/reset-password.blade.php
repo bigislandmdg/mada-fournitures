@@ -1,39 +1,124 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+    <div class="min-h-screen flex flex-col justify-center items-center px-4 py-8 bg-gray-50">
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+        <div class="w-full max-w-[440px]">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            {{-- Card blanche --}}
+            <div class="bg-white border border-gray-300 shadow-sm px-10 py-10">
+
+                {{-- Logo --}}
+                <div class="flex flex-col items-center mb-6">
+                    <a href="{{ route('home') }}" class="flex flex-col items-center gap-2">
+                        <div class="bg-gradient-to-br from-brand-600 to-brand-800 text-white font-bold rounded-xl w-14 h-14 flex items-center justify-center text-lg shadow-md">
+                            MF
+                        </div>
+                        <span class="text-xl font-semibold text-gray-900">Mada Fournitures</span>
+                    </a>
+                </div>
+
+                {{-- Message session --}}
+                <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                {{-- Titre --}}
+                <h1 class="text-2xl font-semibold text-gray-900 mb-1">Réinitialiser le mot de passe</h1>
+                <p class="text-sm text-gray-600 mb-6">
+                    Choisissez un nouveau mot de passe pour sécuriser votre compte.
+                </p>
+
+                <form method="POST" action="{{ route('password.store') }}" class="space-y-4">
+                    @csrf
+
+                    {{-- Token caché --}}
+                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+                    {{-- Email --}}
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-900 mb-1.5">
+                            Adresse email
+                        </label>
+                        <input id="email"
+                               type="email"
+                               name="email"
+                               value="{{ old('email', $request->email) }}"
+                               required
+                               autofocus
+                               autocomplete="username"
+                               placeholder="nom@exemple.com"
+                               class="w-full px-2 py-2 border border-gray-400 border-b-gray-900 focus:border-b-2 focus:border-[#0067b8] focus:outline-none text-sm text-gray-900 bg-white">
+                        @error('email')
+                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Mot de passe --}}
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-900 mb-1.5">
+                            Nouveau mot de passe
+                        </label>
+                        <input id="password"
+                               type="password"
+                               name="password"
+                               required
+                               autocomplete="new-password"
+                               placeholder="Nouveau mot de passe"
+                               class="w-full px-2 py-2 border border-gray-400 border-b-gray-900 focus:border-b-2 focus:border-[#0067b8] focus:outline-none text-sm text-gray-900 bg-white">
+                        @error('password')
+                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Confirmation --}}
+                    <div>
+                        <label for="password_confirmation" class="block text-sm font-medium text-gray-900 mb-1.5">
+                            Confirmer le mot de passe
+                        </label>
+                        <input id="password_confirmation"
+                               type="password"
+                               name="password_confirmation"
+                               required
+                               autocomplete="new-password"
+                               placeholder="Confirmer le mot de passe"
+                               class="w-full px-2 py-2 border border-gray-400 border-b-gray-900 focus:border-b-2 focus:border-[#0067b8] focus:outline-none text-sm text-gray-900 bg-white">
+                        @error('password_confirmation')
+                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Bouton --}}
+                    <div class="pt-4">
+                        <button type="submit"
+                                class="w-full bg-[#0067b8] hover:bg-[#005da6] text-white font-semibold py-2 px-4 text-sm transition-colors">
+                            Réinitialiser le mot de passe
+                        </button>
+                    </div>
+                </form>
+
+                {{-- Section alternative (liens alignés 2 à 2) --}}
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="{{ route('home') }}"
+                           class="text-sm text-[#0067b8] hover:underline text-left">
+                            Retour au site
+                        </a>
+
+                        @if (Route::has('login'))
+                            <a href="{{ route('login') }}"
+                               class="text-sm text-[#0067b8] hover:underline text-right">
+                                Se connecter
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            {{-- Footer --}}
+            <div class="mt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-600">
+                <div class="flex items-center gap-4">
+                    <a href="{{ route('mentions-legales') }}" class="hover:underline">Conditions d'utilisation</a>
+                    <a href="{{ route('confidentialite') }}" class="hover:underline">Confidentialité</a>
+                </div>
+                <div>© {{ date('Y') }} Mada Fournitures</div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
+    </div>
 </x-guest-layout>

@@ -30,6 +30,10 @@ Route::livewire('/contact', 'formulaire-contact')->name('contact');
 // Panier de devis
 Route::livewire('/devis', 'panier-devis')->name('devis');
 
+// Pages légales
+Route::livewire('/mentions-legales', 'mentions-legales')->name('mentions-legales');
+Route::livewire('/confidentialite', 'confidentialite')->name('confidentialite');
+
 /*
 |--------------------------------------------------------------------------
 | Changement de langue - Français / Malagasy

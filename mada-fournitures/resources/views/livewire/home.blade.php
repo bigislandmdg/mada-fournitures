@@ -1,82 +1,85 @@
 <div>
     {{-- ==================== HERO ==================== --}}
-    <section class="relative overflow-hidden bg-gradient-to-br from-brand-700 via-brand-600 to-brand-900 bg-[length:300%_300%] animate-gradient text-white">
-        {{-- Motif décoratif --}}
-        <div class="absolute inset-0 opacity-10">
-            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <defs>
-                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid)"/>
-            </svg>
+    <section class="relative overflow-hidden bg-white text-gray-900">
+        {{-- ===== CONTENEUR 2 COLONNES ===== --}}
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+
+                {{-- ===== COLONNE GAUCHE : CONTENU ===== --}}
+                <div class="text-center lg:text-left flex flex-col justify-center">
+
+                    {{-- Badge --}}
+                    <div class="inline-flex items-center gap-2 px-4 py-2 mb-8 animate-fade-in-down self-center lg:self-start">
+    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+    <span class="text-sm font-medium text-brand-700">{{ __('ui.hero_badge') }}</span>
+</div>
+
+                    {{-- Titre --}}
+                    <h1 class="text-4xl md:text-5xl lg:text-5xl font-extrabold mb-6 leading-tight tracking-tight text-gray-900 animate-fade-in-up">
+                        {{ __('ui.hero_title_first') }}
+                        <br class="hidden md:block">
+                        <span class="bg-gradient-to-r from-brand-600 via-brand-500 to-brand-700 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                            {{ __('ui.hero_title_second') }}
+                        </span>
+                    </h1>
+
+                    {{-- Sous-titre --}}
+                    <p class="text-lg md:text-xl mb-10 text-gray-600 max-w-3xl lg:max-w-none mx-auto lg:mx-0 leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
+                        {{ __('ui.hero_description') }}
+                    </p>
+
+                    {{-- Boutons --}}
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <a href="{{ route('fournitures.index') }}"
+                           class="group bg-brand-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:bg-brand-700 transition-all duration-300 flex items-center justify-center gap-2">
+                            {{ __('ui.discover_products') }}
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="{{ route('devis') }}"
+                           class="group bg-white border-2 border-gray-200 text-gray-800 px-8 py-4 rounded-xl font-bold hover:bg-gray-50 hover:border-brand-300 transition-all duration-300 flex items-center justify-center gap-2">
+                            {{ __('ui.request_quote') }}
+                            <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-.293.707l-5.414 5.414A1 1 0 0112.586 21H7a2 2 0 01-2-2z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    {{-- Statistiques --}}
+                    <div class="grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0 mt-12 animate-fade-in-up" style="animation-delay: 0.6s;">
+                        <div class="text-center lg:text-left">
+                            <div class="text-3xl md:text-4xl font-extrabold text-gray-900">+500</div>
+                            <div class="text-gray-500 text-sm mt-1">{{ __('ui.stat_products') }}</div>
+                        </div>
+                        <div class="text-center border-x border-gray-200">
+                            <div class="text-3xl md:text-4xl font-extrabold text-gray-900">+200</div>
+                            <div class="text-gray-500 text-sm mt-1">{{ __('ui.stat_clients') }}</div>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <div class="text-3xl md:text-4xl font-extrabold text-gray-900">24h</div>
+                            <div class="text-gray-500 text-sm mt-1">{{ __('ui.stat_quote_response') }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- ===== COLONNE DROITE : IMAGE FIXE (même hauteur que le texte, sans bordure) ===== --}}
+                <div class="relative animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="relative rounded-2xl overflow-hidden h-full min-h-[320px] bg-gray-100">
+                        <img
+                            src="{{ asset('images/hero/bureau.jpg') }}"
+                            alt="Espace de travail professionnel - Mada Fournitures"
+                            class="absolute inset-0 w-full h-full object-cover"
+                            loading="eager"
+                            fetchpriority="high"
+                        >
+                    </div>
+                </div>
+            </div>
         </div>
 
-        {{-- Formes flottantes --}}
-        <div class="absolute top-20 left-10 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute bottom-10 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-float" style="animation-delay: 1.5s;"></div>
-
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
-            {{-- Badge --}}
-            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8 animate-fade-in-down">
-                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                <span class="text-sm font-medium">{{ __('ui.hero_badge') }}</span>
-            </div>
-
-            {{-- Titre --}}
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight tracking-tight animate-fade-in-up">
-                {{ __('ui.hero_title_first') }}
-                <br class="hidden md:block">
-                <span class="bg-gradient-to-r from-yellow-300 via-white to-yellow-300 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                    {{ __('ui.hero_title_second') }}
-                </span>
-            </h1>
-
-            {{-- Sous-titre --}}
-            <p class="text-lg md:text-xl mb-10 text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
-                {{ __('ui.hero_description') }}
-            </p>
-
-            {{-- Boutons --}}
-            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up" style="animation-delay: 0.4s;">
-                <a href="{{ route('fournitures.index') }}"
-                   class="group bg-white text-brand-700 px-8 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                    {{ __('ui.discover_products') }}
-                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                    </svg>
-                </a>
-                <a href="{{ route('devis') }}"
-                   class="group bg-brand-900/50 backdrop-blur-sm border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-900 hover:border-white transition-all duration-300 flex items-center justify-center gap-2">
-                    {{ __('ui.request_quote') }}
-                    <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-.293.707l-5.414 5.414A1 1 0 0112.586 21H7a2 2 0 01-2-2z"/>
-                    </svg>
-                </a>
-            </div>
-
-            {{-- Statistiques --}}
-            <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto mt-16 animate-fade-in-up" style="animation-delay: 0.6s;">
-                <div class="text-center">
-                    <div class="text-3xl md:text-4xl font-extrabold text-white">+500</div>
-                    <div class="text-blue-200 text-sm mt-1">{{ __('ui.stat_products') }}</div>
-                </div>
-                <div class="text-center border-x border-white/20">
-                    <div class="text-3xl md:text-4xl font-extrabold text-white">+200</div>
-                    <div class="text-blue-200 text-sm mt-1">{{ __('ui.stat_clients') }}</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl md:text-4xl font-extrabold text-white">24h</div>
-                    <div class="text-blue-200 text-sm mt-1">{{ __('ui.stat_quote_response') }}</div>
-                </div>
-            </div>
-        </div>
-
-        {{-- Vague de séparation --}}
-        <svg class="absolute bottom-0 left-0 w-full text-gray-50" viewBox="0 0 1440 60" fill="currentColor">
-            <path d="M0,32L80,37.3C160,43,320,53,480,53.3C640,53,800,43,960,37.3C1120,32,1280,32,1360,32L1440,32L1440,60L1360,60C1280,60,1120,60,960,60C800,60,640,60,480,60C320,60,160,60,80,60L0,60Z"/>
-        </svg>
+        {{-- Vague de séparation (conservée) --}}
+        
     </section>
 
     {{-- ==================== CATÉGORIES ==================== --}}
@@ -221,3 +224,4 @@
         </div>
     </section>
 </div>
+

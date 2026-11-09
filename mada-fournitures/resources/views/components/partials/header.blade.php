@@ -1,11 +1,5 @@
-
-@php
-    // Charger les catégories actives pour le header
-    $categoriesMenu = \App\Models\Categorie::actif()->ordonne()->get();
-@endphp
-
 <header
-    x-data="{ scrolled: false, mobileOpen: false, fournituresOpen: false }"
+    x-data="{ scrolled: false, mobileOpen: false }"
     @scroll.window="scrolled = window.scrollY > 10"
     :class="scrolled
         ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100'
@@ -57,118 +51,14 @@
                     ])></span>
                 </a>
 
-                {{-- NOS FOURNITURES --}}
-                <div class="relative"
-                     x-data="{ open: false }"
-                     @mouseenter="open = true"
-                     @mouseleave="open = false"
-                     @keydown.escape.window="open = false">
-
-                    @php
-                        $isFournitures = request()->routeIs('fournitures.*')
-                            || request()->routeIs('produit.*');
-                    @endphp
-
-                    <button
-                        type="button"
-                        @click="open = !open"
-                        :aria-expanded="open.toString()"
-                        aria-haspopup="true"
-                        class="relative px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 whitespace-nowrap flex items-center gap-1
-                            {{ $isFournitures ? 'text-brand-700 bg-brand-50' : 'text-gray-700 hover:text-brand-700 hover:bg-gray-50' }}"
-                    >
-                        Nos fournitures
-
-                        <svg class="w-4 h-4 transition-transform duration-200"
-                             :class="open ? 'rotate-180' : ''"
-                             fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                             aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-
-                        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-brand-600 rounded-full transition-all duration-200
-                            {{ $isFournitures ? 'w-6' : 'w-0' }}"></span>
-                    </button>
-
-                    {{-- DROPDOWN --}}
-                    <div
-                        x-show="open"
-                        x-transition:enter="transition ease-out duration-200"
-                        x-transition:enter-start="opacity-0 -translate-y-1"
-                        x-transition:enter-end="opacity-100 translate-y-0"
-                        x-transition:leave="transition ease-in duration-150"
-                        x-transition:leave-start="opacity-100 translate-y-0"
-                        x-transition:leave-end="opacity-0 -translate-y-1"
-                        @keydown.escape.window="open = false"
-                        class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 max-w-[90vw] bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50 max-h-[70vh] overflow-y-auto"
-                        style="display: none;"
-                    >
-                        {{-- Toutes les fournitures --}}
-                        <a href="{{ route('fournitures.index') }}"
-                           class="flex items-center gap-3 px-4 py-3 text-sm text-gray-800 hover:bg-brand-50 hover:text-brand-700 transition-colors font-semibold border-b border-gray-100">
-
-                            <div class="w-9 h-9 bg-brand-50 text-brand-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                     viewBox="0 0 24 24" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="1.8"
-                                          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-                                </svg>
-                            </div>
-
-                            <div>
-                                <div>Toutes les fournitures</div>
-                                <div class="text-xs text-gray-500 font-normal mt-0.5">
-                                    {{ $categoriesMenu->sum(fn($c) => $c->produits()->count()) }} produits
-                                </div>
-                            </div>
-                        </a>
-
-                        {{-- Catégories dynamiques --}}
-                        @forelse($categoriesMenu as $cat)
-                            <a href="{{ route('fournitures.categorie', $cat->slug) }}"
-                               class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-700 transition-colors group">
-
-                                <div class="w-9 h-9 bg-gray-50 group-hover:bg-brand-100 text-gray-500 group-hover:text-brand-700 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="1.8"
-                                              d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                                    </svg>
-                                </div>
-
-                                <div class="min-w-0 flex-1">
-                                    <div class="truncate font-medium">{{ $cat->nom }}</div>
-
-                                    @if($cat->description)
-                                        <div class="text-xs text-gray-500 truncate mt-0.5">
-                                            {{ \Illuminate\Support\Str::limit($cat->description, 50) }}
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <span class="text-xs text-gray-400 group-hover:text-brand-700 font-semibold flex-shrink-0 transition-colors">
-                                    {{ $cat->produits()->count() }}
-                                </span>
-                            </a>
-                        @empty
-                            <div class="px-4 py-4 text-sm text-gray-500 text-center">
-                                Aucune catégorie disponible
-                            </div>
-                        @endforelse
-                    </div>
-                </div>
-
-                {{-- Marchés publics --}}
+                {{-- Nos expertises (remplace Marchés publics) --}}
                 <a href="{{ route('marches') }}"
                    @class([
                        'relative px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 whitespace-nowrap',
                        'text-brand-700 bg-brand-50' => request()->routeIs('marches'),
                        'text-gray-700 hover:text-brand-700 hover:bg-gray-50' => !request()->routeIs('marches'),
                    ])>
-                    Marchés publics
+                    Nos expertises
                     <span @class([
                         'absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-brand-600 rounded-full transition-all duration-200',
                         'w-6' => request()->routeIs('marches'),
@@ -275,51 +165,7 @@
                 Accueil
             </a>
 
-            {{-- Nos fournitures --}}
-            <div x-data="{ subOpen: false }">
-                <button
-                    type="button"
-                    @click="subOpen = !subOpen"
-                    :aria-expanded="subOpen.toString()"
-                    class="w-full flex items-center justify-between px-4 py-2.5 text-gray-700 hover:bg-brand-50 hover:text-brand-700 rounded-lg transition-colors font-medium"
-                >
-                    <span>Nos fournitures</span>
-
-                    <svg class="w-4 h-4 transition-transform duration-200"
-                         :class="subOpen ? 'rotate-180' : ''"
-                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-
-                <div
-                    x-show="subOpen"
-                    x-transition
-                    class="pl-4 mt-1 space-y-1 border-l-2 border-brand-100 ml-4"
-                    style="display: none;"
-                >
-                    <a href="{{ route('fournitures.index') }}"
-                       @click="mobileOpen = false"
-                       class="block px-4 py-2 text-sm text-gray-600 hover:text-brand-700 hover:bg-brand-50 rounded-lg transition-colors font-semibold">
-                        Toutes les fournitures
-                    </a>
-
-                    @foreach($categoriesMenu as $cat)
-                        <a href="{{ route('fournitures.categorie', $cat->slug) }}"
-                           @click="mobileOpen = false"
-                           class="flex items-center justify-between gap-2 px-4 py-2 text-sm text-gray-600 hover:text-brand-700 hover:bg-brand-50 rounded-lg transition-colors">
-                            <span>{{ $cat->nom }}</span>
-                            <span class="text-xs text-gray-400">
-                                ({{ $cat->produits()->count() }})
-                            </span>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- Marchés publics --}}
+            {{-- Nos expertises (remplace Marchés publics) --}}
             <a href="{{ route('marches') }}"
                @click="mobileOpen = false"
                @class([
@@ -327,7 +173,7 @@
                    'bg-brand-50 text-brand-700' => request()->routeIs('marches'),
                    'text-gray-700 hover:bg-brand-50 hover:text-brand-700' => !request()->routeIs('marches'),
                ])>
-                Marchés publics
+                Nos expertises
             </a>
 
             {{-- À propos --}}

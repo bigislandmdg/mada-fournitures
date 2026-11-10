@@ -10,9 +10,9 @@
 
                     {{-- Badge --}}
                     <div class="inline-flex items-center gap-2 px-4 py-2 mb-8 animate-fade-in-down self-center lg:self-start">
-    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-    <span class="text-sm font-medium text-brand-700">{{ __('ui.hero_badge') }}</span>
-</div>
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="text-sm font-medium text-brand-700">{{ __('ui.hero_badge') }}</span>
+                    </div>
 
                     {{-- Titre --}}
                     <h1 class="text-4xl md:text-5xl lg:text-5xl font-extrabold mb-6 leading-tight tracking-tight text-gray-900 animate-fade-in-up">
@@ -47,32 +47,37 @@
                     </div>
 
                     {{-- Statistiques --}}
-                    <div class="grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0 mt-12 animate-fade-in-up" style="animation-delay: 0.6s;">
-                        <div class="text-center lg:text-left">
-                            <div class="text-3xl md:text-4xl font-extrabold text-gray-900">+500</div>
-                            <div class="text-gray-500 text-sm mt-1">{{ __('ui.stat_products') }}</div>
-                        </div>
-                        <div class="text-center border-x border-gray-200">
-                            <div class="text-3xl md:text-4xl font-extrabold text-gray-900">+200</div>
-                            <div class="text-gray-500 text-sm mt-1">{{ __('ui.stat_clients') }}</div>
-                        </div>
-                        <div class="text-center lg:text-left">
-                            <div class="text-3xl md:text-4xl font-extrabold text-gray-900">24h</div>
-                            <div class="text-gray-500 text-sm mt-1">{{ __('ui.stat_quote_response') }}</div>
-                        </div>
-                    </div>
+                    {{-- Statistiques --}}
+<div class="grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0 mt-12">
+    @php
+        $statsHero = [
+            ['value' => '+500', 'label' => __('ui.stat_products')],
+            ['value' => '+200', 'label' => __('ui.stat_clients')],
+            ['value' => '24h',  'label' => __('ui.stat_quote_response')],
+        ];
+    @endphp
+
+    @foreach($statsHero as $i => $stat)
+        <div class="text-center lg:text-left animate-fade-in-up group cursor-default
+                    {{ $i === 1 ? 'border-x border-gray-200' : '' }}"
+             style="animation-delay: {{ 0.6 + $i * 0.15 }}s;">
+            <div class="text-3xl md:text-4xl font-extrabold text-gray-900
+                        transition-all duration-300 group-hover:text-brand-600 group-hover:-translate-y-1">
+                {{ $stat['value'] }}
+            </div>
+            <div class="text-gray-500 text-sm mt-1 transition-colors duration-300 group-hover:text-gray-700">
+                {{ $stat['label'] }}
+            </div>
+        </div>
+    @endforeach
+</div>
                 </div>
 
-                {{-- ===== COLONNE DROITE : IMAGE FIXE (même hauteur que le texte, sans bordure) ===== --}}
+                {{-- ===== COLONNE DROITE : APERÇU DASHBOARD (SVG INLINE) ===== --}}
                 <div class="relative animate-fade-in-up" style="animation-delay: 0.3s;">
-                    <div class="relative rounded-2xl overflow-hidden h-full min-h-[320px] bg-gray-100">
-                        <img
-                            src="{{ asset('images/hero/bureau.jpg') }}"
-                            alt="Espace de travail professionnel - Mada Fournitures"
-                            class="absolute inset-0 w-full h-full object-cover"
-                            loading="eager"
-                            fetchpriority="high"
-                        >
+                    <div class="relative rounded-2xl overflow-hidden h-full min-h-[320px]
+                                bg-gradient-to-br from-blue-50 to-indigo-50 ring-1 ring-blue-100 shadow-inner">
+                        <x-dashboard-preview class="absolute inset-0 w-full h-full" />
                     </div>
                 </div>
             </div>

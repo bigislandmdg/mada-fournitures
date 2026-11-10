@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         {{-- ============ GRILLE PRINCIPALE ============ --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
 
             {{-- Colonne 1 : Logo + description + réseaux --}}
             <div>
@@ -49,26 +49,23 @@
 
             {{-- Colonne 2 : Navigation --}}
             <div>
-                <h4 class="text-white font-semibold mb-4">Navigation</h4>
-                <ul class="space-y-2.5 text-sm">
+                <h4 class="text-white font-semibold mb-3">Navigation</h4>
+                <ul class="space-y-2 text-sm">
                     <li>
                         <a href="{{ route('home') }}" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
                             <span class="w-1 h-1 bg-gray-600 group-hover:bg-brand-500 rounded-full transition-colors"></span>
                             Accueil
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('fournitures.index') }}" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-                            <span class="w-1 h-1 bg-gray-600 group-hover:bg-brand-500 rounded-full transition-colors"></span>
-                            Nos fournitures
-                        </a>
-                    </li>
+
+                    {{-- Lien inchangé (route('marches')), texte remplacé par « Nos expertises » --}}
                     <li>
                         <a href="{{ route('marches') }}" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
                             <span class="w-1 h-1 bg-gray-600 group-hover:bg-brand-500 rounded-full transition-colors"></span>
-                            Marchés publics
+                            Nos expertises
                         </a>
                     </li>
+
                     <li>
                         <a href="{{ route('a-propos') }}" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
                             <span class="w-1 h-1 bg-gray-600 group-hover:bg-brand-500 rounded-full transition-colors"></span>
@@ -86,8 +83,8 @@
 
             {{-- Colonne 3 : Catégories --}}
             <div>
-                <h4 class="text-white font-semibold mb-4">Catégories</h4>
-                <ul class="space-y-2.5 text-sm">
+                <h4 class="text-white font-semibold mb-3">Catégories</h4>
+                <ul class="space-y-2 text-sm">
                     @php
                         $categories = \App\Models\Categorie::actif()->ordonne()->take(5)->get();
                     @endphp
@@ -107,8 +104,8 @@
 
             {{-- Colonne 4 : Contact --}}
             <div>
-                <h4 class="text-white font-semibold mb-4">Contact</h4>
-                <ul class="space-y-3 text-sm">
+                <h4 class="text-white font-semibold mb-3">Contact</h4>
+                <ul class="space-y-2 text-sm">
 
                     {{-- Adresse --}}
                     <li class="flex items-start gap-3 text-gray-400">
@@ -145,7 +142,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         <div>
-                            <div class="text-xs text-gray-500 uppercase tracking-wider mb-1">Horaires</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Horaires</div>
                             <div>Lun - Ven : 8h - 17h</div>
                             <div>Sam : 8h - 12h</div>
                         </div>
@@ -153,23 +150,27 @@
                 </ul>
             </div>
         </div>
+        {{-- ============ FIN GRILLE PRINCIPALE ============ --}}
 
-        {{-- ============ BARRE INFÉRIEURE ============ --}}
-        <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+         {{-- ============ BARRE INFÉRIEURE ============ --}}
+<div class="border-t border-gray-800 mt-12 pt-4 grid grid-cols-1 sm:grid-cols-3 items-center gap-2 text-sm text-gray-500">
 
-            {{-- Copyright --}}
-            <div class="text-sm text-gray-500 text-center sm:text-left">
-                © {{ date('Y') }} <span class="text-gray-300 font-medium">Mada Fournitures</span>.
-                Tous droits réservés.
-            </div>
+    {{-- Copyright (gauche sur desktop, centré sur mobile) --}}
+    <div class="text-center sm:text-left">
+        © {{ date('Y') }} <span class="text-gray-300 font-medium">Mada Fournitures</span>.
+        Tous droits réservés.
+    </div>
 
-            {{-- Liens légaux --}}
-            <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-500">
-              <a href="{{ route('mentions-legales') }}" class="hover:text-white transition-colors">Mentions légales</a>
-              <span class="text-gray-700 hidden sm:inline">·</span>
-              <a href="{{ route('confidentialite') }}" class="hover:text-white transition-colors">Confidentialité</a>
-            </div>
-        </div>
+    {{-- Liens légaux (centrés partout) --}}
+    <div class="flex flex-wrap items-center justify-center gap-3">
+        <a href="{{ route('mentions-legales') }}" class="hover:text-white transition-colors">Mentions légales</a>
+        <span class="text-gray-700 hidden sm:inline">·</span>
+        <a href="{{ route('confidentialite') }}" class="hover:text-white transition-colors">Confidentialité</a>
+    </div>
+
+    {{-- Zone vide (droite) pour équilibrer la grille et garder les liens au centre --}}
+    <div class="hidden sm:block" aria-hidden="true"></div>
+</div>
     </div>
 </footer>
 

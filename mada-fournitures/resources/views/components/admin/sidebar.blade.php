@@ -18,6 +18,7 @@
        }"
        class="fixed lg:static inset-y-0 left-0 z-40
               bg-white border-r border-gray-200 text-gray-700
+              shadow-sm
               transition-all duration-300 ease-in-out
               flex flex-col flex-shrink-0 h-full">
 
@@ -30,8 +31,8 @@
            x-transition:enter="transition-opacity duration-200"
            x-transition:enter-start="opacity-0"
            x-transition:enter-end="opacity-100"
-           class="flex items-center gap-2 min-w-0">
-            <div class="bg-gradient-to-br from-brand-500 to-brand-700 text-white font-bold rounded-lg w-8 h-8 flex items-center justify-center flex-shrink-0 text-xs">
+           class="flex items-center gap-2 min-w-0 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/40">
+             <div class="bg-blue-600 text-white font-bold rounded-lg w-8 h-8 flex items-center justify-center flex-shrink-0 text-xs shadow-sm ring-1 ring-blue-700/20">
                 MF
             </div>
             <div class="min-w-0">
@@ -43,8 +44,8 @@
         {{-- Logo seul --}}
         <a href="{{ route('admin.dashboard') }}"
            x-show="sidebarCollapsed"
-           class="mx-auto">
-            <div class="bg-gradient-to-br from-brand-500 to-brand-700 text-white font-bold rounded-lg w-8 h-8 flex items-center justify-center text-xs">
+           class="mx-auto rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/40">
+            <div class="bg-blue-600 text-white font-bold rounded-lg w-8 h-8 flex items-center justify-center flex-shrink-0 text-xs shadow-sm ring-1 ring-blue-700/20">
                 MF
             </div>
         </a>
@@ -52,20 +53,20 @@
         {{-- Toggle desktop --}}
         <button @click="toggleSidebar()"
                 x-show="!sidebarCollapsed"
-                class="hidden lg:flex p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-brand-600 transition flex-shrink-0">
+                class="hidden lg:flex p-1.5 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition flex-shrink-0">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
-            </svg>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
         </button>
     </div>
 
     {{-- Toggle réduit --}}
     <button @click="toggleSidebar()"
             x-show="sidebarCollapsed"
-            class="hidden lg:flex mx-auto my-2 p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-brand-600 transition">
+            class="hidden lg:flex mx-auto my-2 p-1.5 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
-        </svg>
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+</svg>
     </button>
 
     {{-- ============ NAVIGATION ============ --}}
@@ -81,12 +82,13 @@
             <a href="{{ route($item['route']) }}"
                :class="sidebarCollapsed ? 'justify-center px-0' : 'justify-start px-3'"
                class="group relative flex items-center gap-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
+                      focus:outline-none focus:ring-2 focus:ring-blue-500/40
                       {{ $isActive
-                          ? 'bg-brand-50 text-brand-700'
+                          ? 'bg-blue-50 text-blue-700'
                           : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900' }}"
                title="{{ $item['label'] }}">
 
-                <svg class="w-5 h-5 flex-shrink-0 {{ $isActive ? 'text-brand-600' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 flex-shrink-0 {{ $isActive ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $item['icon'] }}"/>
                 </svg>
 
@@ -95,13 +97,13 @@
                 </span>
 
                 @if($isActive)
-                    <span class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-brand-500 rounded-r"></span>
+                    <span class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-blue-500 rounded-r"></span>
                 @endif
 
                 {{-- Tooltip quand réduit --}}
                 <div x-show="sidebarCollapsed"
                      class="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded
-                            opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">
+                            opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50 shadow-lg">
                     {{ $item['label'] }}
                 </div>
             </a>
@@ -111,16 +113,17 @@
 
         <a href="{{ route('home') }}" target="_blank"
            :class="sidebarCollapsed ? 'justify-center px-0' : 'justify-start px-3'"
-           class="group relative flex items-center gap-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+           class="group relative flex items-center gap-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors
+                  focus:outline-none focus:ring-2 focus:ring-blue-500/40"
            title="Voir le site">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 flex-shrink-0 text-gray-400 group-hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
             <span x-show="!sidebarCollapsed" x-transition class="truncate">Voir le site</span>
 
             <div x-show="sidebarCollapsed"
                  class="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded
-                        opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">
+                        opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50 shadow-lg">
                 Voir le site
             </div>
         </a>
@@ -131,13 +134,14 @@
         <div class="relative">
             <button @click="userOpen = !userOpen"
                     :class="sidebarCollapsed ? 'justify-center px-0' : 'justify-start px-2'"
-                    class="flex items-center gap-2.5 w-full py-2 rounded-lg hover:bg-gray-100 transition-colors">
-                <div class="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-700 text-white rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">
+                    class="flex items-center gap-2.5 w-full py-2 rounded-lg hover:bg-gray-100 transition-colors
+                           focus:outline-none focus:ring-2 focus:ring-blue-500/40">
+                    <div class="bg-blue-600 text-white font-bold rounded-lg w-8 h-8 flex items-center justify-center flex-shrink-0 text-xs shadow-sm ring-1 ring-blue-700/20">
                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                 </div>
                 <div x-show="!sidebarCollapsed" x-transition class="min-w-0 flex-1 text-left">
                     <div class="text-sm font-medium text-gray-900 truncate">{{ auth()->user()->name }}</div>
-                    <div class="text-[10px] text-gray-500 truncate">Administrateur</div>
+                    <div class="text-[10px] text-gray-500 truncate">{{ auth()->user()->email }}</div>
                 </div>
                 <svg x-show="!sidebarCollapsed" x-transition class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
